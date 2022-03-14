@@ -1,4 +1,5 @@
 <?php
+session_start();
     //Require libraries from folder libraries
     require_once 'libraries/Core.php';
     require_once 'libraries/Controller.php';

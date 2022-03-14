@@ -9,7 +9,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT (Dynamic links)
-    define('URLROOT', 'localhost:8080/Blog');
+    define('URLROOT', 'localhost:8080/');
 
     //Sitename
     define('SITENAME', 'Blog') ;
