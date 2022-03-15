@@ -60,7 +60,11 @@
     <button class="w-100 btn btn-lg btn-primary" name="addUser" type="submit">Register User</button>
     <p class="m-5 text-primary"> Already registered <a href="pages/login" target="_blank">Sign In</a> </p>
     <p class="mt-5 mb-3 text-muted">&copy; CEDCOSS Technologies</p>
-    <p class="text-danger"> <?php  if ($data != "") echo $data ; ?> </p>
+    <p class="text-danger"> <?php  if ($data != "") {
+        echo $data ;
+        ?>  
+      </p>  <a class="btn btn-success" href="<?php echo URLROOT  ?>pages/home/user">Read Blogs</a>  <?php
+} ?> 
   </form>
 </main>  
   </body>

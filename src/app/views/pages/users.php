@@ -67,23 +67,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="orderAdmin.php">
-                <span data-feather="file"></span>
-                Orders
-              </a>
+            <form action="/pages/signUp"  method="POST">
+          <button type="submit"  class="btn-primary">Add New User</button>
+        </form>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products.php">
-                <span data-feather="shopping-cart"></span>
-                Products
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a> 
+        </ul>
+       </div> 
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -132,9 +121,7 @@
                 ?>
     </div>
         </div>
-        <form action="/pages/signUp"  method="POST">
-          <button type="submit"  class="btn-primary">Add New User</button>
-        </form>
+       
       </main>
     </div>
   </div>

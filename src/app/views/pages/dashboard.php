@@ -1,5 +1,9 @@
 <?php
-
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+// echo "on Admin dashboard";
+// die();
 
 
 ?>
@@ -50,7 +54,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="signout.php">Sign out</a>
+        <a class="nav-link px-3" href="<?php echo URLROOT ?>pages/signOut">Sign out</a>
       </div>
     </div>
   </header>
@@ -67,15 +71,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/users">
+              <a class="nav-link" href="<?php echo URLROOT?>pages/users">
                 <span data-feather="file"></span>
                 Users
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products.php">
-                <span data-feather="shopping-cart"></span>
-                Products
               </a>
             </li>
             <li class="nav-item">
@@ -103,12 +101,12 @@
         </div>
 
         <h2>Go to Your Blogs</h2>
-        <form action="/pages/home/admin" method="post">
+        <form action="/pages/home" method="post">
         <input class="btn btn-primary" id="edit" type="submit" name="" value="Click to go to Blogs">
         </form>
         <br> <br>
         <h2>Add New Blog</h2>
-        <form action="/pages/newBlog/1" method="post">
+        <form action="/pages/newBlog" method="post">
         <input class="btn btn-success" type="submit" name="addBlog" value="Add Blog">
         </form>
         </div>

@@ -66,25 +66,10 @@
                 <span data-feather="home"></span>
                 Dashboard
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/users">
-                <span data-feather="file"></span>
-                Users
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products.php">
-                <span data-feather="shopping-cart"></span>
-                Products
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a> 
+            </li>   
+       </ul>
+     </div>
+              
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -114,7 +99,7 @@
         <input class="btn btn-success" type="submit" name="addBlog" value="Add Blog">
         </form>
         <br> <br>
-        <form action="/pages/yourBlogs/<?php echo $data["user_id"]?> " method="post">
+        <form action="<?php echo URLROOT ?>pages/yourBlogs/<?php echo $data["user_id"]?> " method="post">
         <input class="btn btn-secondary" type="submit" name="Blog" value="Your Blogs">
         </form>
         </div>
