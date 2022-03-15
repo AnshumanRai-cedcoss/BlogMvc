@@ -1,4 +1,9 @@
-
+<?php 
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+// die();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -45,7 +50,7 @@
             <li><a href="pages/login" class="text-white">Login</a></li>
             <?php } else {
               ?>
-              <li><a href="pages/" class="text-white">Dashboard</a></li>
+              <li><a href="pages/userDash" class="text-white">Dashboard</a></li>
               <?php } ?>
             <li><a href="#" class="text-white">Like on Facebook</a></li>
             <li><a href="#" class="text-white">Email me</a></li>
@@ -82,7 +87,8 @@
           contents, the creator, etc. Make it short and sweet, but not too short so folks dont 
           simply skip over it entirely.</p>
         <p>
-          <a href="pages/userDashboard/<?php echo $_SESSION["user"][0]["user_id"]?>" class="btn btn-primary my-2">Dashboard</a>
+          <a href="<?php echo URLROOT?>/pages/userDash" 
+          class="btn btn-primary my-2">Dashboard</a>
         </p>
       </div>
     </div>
@@ -116,14 +122,19 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <?php
-                $role =  $data[count($data) - 1];
+                if (isset($_SESSION["user"])) {
+                $role =  $_SESSION["user"][0]["role"];
+                }
+                else {
+                  $role = "user";
+                }
                 // echo $role;
-                array_pop($data);
-                display($data, $role);
-                function display($stm, $role)
-                {
+                // display($data, $role);
+                // function display($stm, $role)
+                // {
                     $html="";
-                    foreach ($stm as $k => $v) {
+
+                    foreach ($data as $k => $v) {
                         $text = "";
                         
                         $text = substr($v["text"], 0, 125);
@@ -162,7 +173,7 @@
                         </div> ';
                     }
                     echo $html;
-                }
+                
                 
                 ?>
 </div>

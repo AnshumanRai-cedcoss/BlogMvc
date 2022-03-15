@@ -1,4 +1,5 @@
 <?php
+
 ?>
 <html lang="en">
   <head>
@@ -56,7 +57,7 @@
     <button class="w-100 btn btn-lg btn-primary" name="signIn" type="submit">Sign in</button> 
   </form>
   
-   <a href="/signUp" target="_blank" class="btn btn-success">Create New Account</a>
+   <a href="<?php echo URLROOT?>signUp" target="_blank" class="btn btn-success">Create New Account</a>
     <p class="mt-5 mb-3 text-muted">&copy; CEDCOSS Technologies</p>
   
 </main>   

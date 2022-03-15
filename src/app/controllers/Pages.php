@@ -2,54 +2,44 @@
 // session_start();
 class Pages extends Controller
 {
-  public function __construct()
-  {
-    $this->userModel = $this->model('User');
-    $this->blogModel = $this->model('Blog');
-  }
+    public function __construct()
+    {
+        $this->userModel = $this->model('User');
+        $this->blogModel = $this->model('Blog');
+    }
 
-  public function index()
-  {
-    $data = $this->blogModel->getBlogs();
-    array_push($data, "user");
-    $this->view('pages/home', $data);
-  }
-  public function login()
-  {
-    if (isset($_POST["signIn"])) {
-      $email = $_POST["emailId"];
-      $password = $_POST["pass"];
-      $res = $this->userModel->verifyUser($email, $password);
-      if (count($res) > 0) {
-        $_SESSION["user"] = $res;
-        // print_r($_SESSION["user"]);
-        // die();
-        foreach ($res as $key => $value) {
-          if ($value["role"] == "admin") {
-            $this->userDash($value["role"], 1);
-          } else {
-            if ($value["status"] == "pending") {
-              echo "You are not approved";
+    public function index()
+    {
+        $data = $this->blogModel->getBlogs();
+        $this->view('pages/home', $data);
+    }
+    public function login()
+    {
+        if (isset($_POST["signIn"])) {
+            $email = $_POST["emailId"];
+            $password = $_POST["pass"];
+            $res = $this->userModel->verifyUser($email, $password);
+      
+            if (count($res) > 0) {
+                if (!isset($_SESSION["user"])) {
+                    $_SESSION["user"] = $res;
+                }
+                $this->userDash();
             } else {
-              $role = $value["role"];
-              $this->userDash($role, $value["user_id"]);
-            }
-          }
-        }
-      } else {
-        echo "Wrong id or password";
+                echo "Wrong id or password";
       }
     } else {
       $this->view('pages/login');
     }
   }
 
-  public function home($role)
+  public function home()
   {
-    $data = $this->blogModel->getBlogs();
-    array_push($data, $role);
-    $this->view('pages/home', $data);
+        $data = $this->blogModel->getBlogs();
+        $this->view('pages/home', $data);
   }
+
+
   public function userDashboard($id)
   {
    if($id != 1)
@@ -60,22 +50,26 @@ class Pages extends Controller
     $this->userDash("admin", $id);
    }
   }
-  public function userDash($role, $id)
+
+  public function userDash()
   {
     if (isset($_POST["delBtn"])) {
       $bid = $_POST["delId"];
       $this->blogModel->deleteBlog($bid);
     }
+    $role = $_SESSION["user"][0]["role"];
+    $id = $_SESSION["user"][0]["user_id"];
     if ($role == "admin") {
-      $result = $this->userModel->getUser($id);
+      $result = $_SESSION["user"][0];
       $this->view('pages/dashboard', $result);
     } else {
       $this->dashboardUser($id);
     }
   }
+
   public function dashboardUser($id)
   {
-    $result = $this->userModel->getUser($id);
+    $result = $_SESSION["user"][0];
     $this->view('pages/dashboardUser', $result);
   }
   public function moreDetails()
@@ -138,16 +132,19 @@ class Pages extends Controller
     }
     $this->view('pages/signUp', $user);
   }
-  public function newBlog($id)
+  public function newBlog()
   {
-    // die($id);
+    $id =  $_SESSION["user"][0]["user_id"];
+    $role = $_SESSION["user"][0]["role"];
+    // die($id." ".$role);
+     
     if (isset($_POST["addButton"])) {
       $text = $_POST["blogText"];
       $title = $_POST["pname"];
       $img = $_FILES['c_image']['name'];
       $c_image_temp = $_FILES['c_image']['tmp_name'];
       $this->blogModel->newBlog($id, $img, $c_image_temp, $text, $title);
-      $this->userDash("admin", $id);
+      $this->userDash($role, $id);
     } else {
       $this->view('pages/newBlog');
     }
@@ -155,7 +152,13 @@ class Pages extends Controller
   public function yourBlogs($id)
   {
     $result = $this->blogModel->userBlogs($id);
-    array_push($result, "writer");
+     $_SESSION["user"][0]["role"] = "writer";
     $this->view('pages/home', $result);
   }
+
+
+  public function signOut()
+  {
+    $this->view('pages/signOut');
+  } 
 }
